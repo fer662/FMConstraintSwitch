@@ -16,12 +16,15 @@
 
 @implementation FMStateConstraintSwitch
 
+
 - (void)setState:(BOOL)state
 {
-    if (_state != state || !self.firstChangeCompleted) {
+    if (_state != state || (!self.firstChangeCompleted && self.layoutedView)) {
         _state = state;
         
-        self.firstChangeCompleted = YES;
+        if (self.layoutedView) {
+            self.firstChangeCompleted = YES;
+        }
         
         for (NSLayoutConstraint *c in self.noStateConstraints) {
             c.priority = state?1:999;
