@@ -8,12 +8,20 @@
 
 #import "FMStateConstraintSwitch.h"
 
+@interface FMStateConstraintSwitch ()
+
+@property (nonatomic, assign) BOOL firstChangeCompleted;
+
+@end
+
 @implementation FMStateConstraintSwitch
 
 - (void)setState:(BOOL)state
 {
-    if (_state != state) {
+    if (_state != state || !self.firstChangeCompleted) {
         _state = state;
+        
+        self.firstChangeCompleted = YES;
         
         for (NSLayoutConstraint *c in self.noStateConstraints) {
             c.priority = state?1:999;
