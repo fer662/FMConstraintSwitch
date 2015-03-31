@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
 
 /**
  A class that encapsulated the changing of the priority of two groups of constraints depending on the visibility
